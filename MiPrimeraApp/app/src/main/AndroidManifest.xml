@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiPrimeraApp">
         <activity
+            android:name=".Medicacion"
+            android:exported="false" />
+        <activity
+            android:name=".Hidratacion"
+            android:exported="false" />
+        <activity
+            android:name=".Actividad"
+            android:exported="false" />
+        <activity
+            android:name=".Glucosa"
+            android:exported="false" />
+        <activity
+            android:name=".Presion"
+            android:exported="false" />
+        <activity
+            android:name=".Peso"
+            android:exported="false" />
+        <activity
             android:name=".Splash"
             android:exported="true">
             <intent-filter>
@@ -20,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" />
     </application>
 
