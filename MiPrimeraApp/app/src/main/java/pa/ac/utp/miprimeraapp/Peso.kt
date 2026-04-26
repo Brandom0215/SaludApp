@@ -1,6 +1,7 @@
 package pa.ac.utp.miprimeraapp
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +16,7 @@ class Peso : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_peso)
 
+       // Se localiza cada elemento visual del diseño xml y lo guardaamos en una variable de Kotlin
         val etEdad = findViewById<EditText>(R.id.etEdad)
         val etPeso = findViewById<EditText>(R.id.etPeso)
         val etEstatura = findViewById<EditText>(R.id.etEstatura)
@@ -36,6 +38,9 @@ class Peso : AppCompatActivity() {
             etEstatura.text.clear()
         }
 
+
+        //función auxiliar que interpreta el valor del IMC y devuelve una clasificación
+
         fun categorizarIMC(imc: Double): String {
             return when {
                 imc < 18.5 -> "Bajo Peso"
@@ -47,48 +52,50 @@ class Peso : AppCompatActivity() {
             }
         }
 
+        //Boton calcular
         btnCalcular.setOnClickListener {
 
-            // 1. Obtener valores
+            // Se obtienen los valores
             val sEdad = etEdad.text.toString()
             val sPeso = etPeso.text.toString()
             val sEstatura = etEstatura.text.toString()
 
-            // 2. Validar campos vacíos
+            // Se valida los campos vacios
             if (sEdad.isEmpty() || sPeso.isEmpty() || sEstatura.isEmpty()) {
                 Toast.makeText(this, "Completa todos los campos",
                     Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // 3. Convertir a números
+            // Luego convertimos a numeros
             val edad = sEdad.toInt()
             var peso = sPeso.toDouble()
             var estatura = sEstatura.toDouble()
 
-            // 4. Normalizar unidades
+            // Normalización de Peso a KG si está en Libras
             if (swPeso.isChecked) {
-                peso *= 0.453592   // lb → kg
+                peso *= 0.453592
             }
 
+            // Normalización de Estatura a CM si está en Pulgadas
             if (swEstatura.isChecked) {
-                estatura *= 2.54   // in → cm
+                estatura *= 2.54
             }
 
-            // 5. Convertir a metros
+            // Convertimos la estatura a metros
             val estaturaMetros = estatura / 100
 
-            // 6. Calcular valores
+            // Se calculan los valores
             val imc = peso / (estaturaMetros * estaturaMetros)
             val pesoIdeal = 22 * (estaturaMetros * estaturaMetros)
             val grasa = (1.20 * imc) + (0.23 * edad) - 16.2
 
-            // 7. Mostrar resultados
+            // Mostramos los resultados
             tvIMC.text = String.format("%.1f", imc)
             tvPesoIdeal.text = String.format("%.1f kg", pesoIdeal)
             tvGrasa.text = String.format("%.1f%%", grasa)
 
-            // 8. Clasificación
+            // Clasificacion
             tvClasificacion.text = categorizarIMC(imc)
         }
 
