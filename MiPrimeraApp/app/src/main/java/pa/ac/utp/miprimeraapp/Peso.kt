@@ -98,25 +98,5 @@ class Peso : AppCompatActivity() {
             // Clasificacion
             tvClasificacion.text = categorizarIMC(imc)
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

@@ -1,233 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDF1F6"
+    android:fillViewport="true">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F0F4F8"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:text="Control de Peso"
+            android:textColor="#1A4375"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edad"
+            android:textColor="#5E7A9D" />
+
+        <EditText
+            android:id="@+id/etEdad"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/imput_round"
+            android:hint="Ej. 25"
+            android:inputType="number"
+            android:paddingHorizontal="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_marginBottom="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Control de Peso"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#1A4375"
-                android:layout_gravity="center"
-                android:layout_marginBottom="32dp"/>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edad"
+                android:layout_weight="1"
+                android:text="Peso"
                 android:textColor="#5E7A9D" />
 
-            <EditText
-                android:id="@+id/etEdad"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/imput_round"
-                android:hint="Ej. 25"
-                android:inputType="number"
-                android:paddingHorizontal="16dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swPesoUnit"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="2dp">
-
-
-                <TextView android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Peso"
-                    android:textColor="#5E7A9D"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/swPesoUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="KG/LB"
-                    android:textColor="#1A4375" />
+                android:text="KG/LB"
+                android:textColor="#1A4375" />
         </LinearLayout>
 
-            <EditText
-                android:id="@+id/etPeso"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/imput_round"
-                android:hint="Peso (Kg)"
-                android:inputType="numberDecimal|numberSigned"
-                android:paddingHorizontal="16dp"
-                android:minHeight="50dp"
-                android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/etPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/imput_round"
+            android:hint="Peso (Kg)"
+            android:inputType="numberDecimal|numberSigned"
+            android:minHeight="50dp"
+            android:paddingHorizontal="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Estatura"
+                android:textColor="#5E7A9D" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swEstaturaUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CM/IN"
+                android:textColor="#1A4375" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etEstatura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/imput_round"
+            android:hint="Estatura (cm)"
+            android:inputType="numberDecimal|numberSigned"
+            android:minHeight="50dp"
+            android:paddingHorizontal="16dp" />
+
+        <Button
+            android:id="@+id/btnCalcular"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#1A4375"
+            android:text="CALCULAR"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:cornerRadius="16dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Estatura"
-                    android:textColor="#5E7A9D" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/swEstaturaUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CM/IN"
-                    android:textColor="#1A4375" />
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/etEstatura"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/imput_round"
-                android:hint="Estatura (cm)"
-                android:inputType="numberDecimal|numberSigned"
-                android:paddingHorizontal="16dp"
-                android:minHeight="50dp"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btnCalcular"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:text="CALCULAR"
-                android:textStyle="bold"
-                android:backgroundTint="#1A4375"
-                android:textColor="#FFFFFF"
-                app:cornerRadius="16dp"
-                android:layout_marginBottom="24dp"
-                />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:background="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:text="IMC"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="IMC"
-                                android:textSize="12sp"
-                                android:textColor="#888888"/>
-
-                            <TextView
-                                android:id="@+id/tvIMC"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="--"
-                                android:textColor="#4CAF50"
-                                android:textSize="20sp"
-                                android:textStyle="bold"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tvIMC"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="PESO IDEAL"
-                                android:textSize="12sp"
-                                android:textColor="#888888"/>
-
-                            <TextView
-                                android:id="@+id/tvPesoIdeal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="--"
-                                android:textColor="#4CAF50"
-                                android:textSize="20sp"
-                                android:textStyle="bold"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="GRASA"
-                                android:textSize="12sp"
-                                android:textColor="#888888"/>
-
-                            <TextView
-                                android:id="@+id/tvGrasa"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="--"
-                                android:textColor="#4CAF50"
-                                android:textSize="20sp"
-                                android:textStyle="bold"/>
-                        </LinearLayout>
-
+                            android:text="--"
+                            android:textColor="#4CAF50"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="#E0E0E0" />
-
-                    <TextView
-                        android:id="@+id/tvClasificacion"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="32dp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Resultado"
-                        android:textColor="#1A4375"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical">
 
-        </LinearLayout>
-    </ScrollView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PESO IDEAL"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvPesoIdeal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="#4CAF50"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GRASA"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvGrasa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="#4CAF50"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="#E0E0E0" />
+
+                <TextView
+                    android:id="@+id/tvClasificacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center"
+                    android:text="Resultado"
+                    android:textColor="#1A4375"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

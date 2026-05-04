@@ -1,20 +1,470 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6F0FA"
-    tools:context=".Presion">
+    android:background="#F4F0F7"
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="158dp"
-        android:layout_height="136dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_presion" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/presion_encabezado"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="40dp"
+            android:paddingBottom="14dp"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_presion"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Icono presión"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registro de Presión Arterial"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Contenido Principal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Card con datos de la medicion-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/presion_tarjeta_datos"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Datos de la Medición"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#1C1B1F"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Fila de la fecha y la hora  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <!-- Botón Fecha -->
+                    <LinearLayout
+                        android:id="@+id/btnFecha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/presion_boton_fecha"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:text="📅"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Seleccionar Fecha:"
+                                android:textSize="11sp"
+                                android:textColor="#666666"/>
+
+                            <TextView
+                                android:id="@+id/txtFecha"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DD/MM/AAAA"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1C1B1F"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginStart="16dp">
+
+                        <TextView
+                            android:id="@+id/txtHora"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00:00"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="#1C1B1F"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(24h)"
+                            android:textSize="12sp"
+                            android:textColor="#888888"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Etiquetas, Sistólica , Diastólica y Pulso -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="SISTÓLICA\n(mmHg)"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#555555"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="DIASTÓLICA\n(mmHg)"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#555555"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="PULSO\n(BPM)"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#555555"/>
+                </LinearLayout>
+
+                <!-- Valores y las flechas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+
+                    <!-- Sistólica -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/arrowUpSistolica"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▲"
+                            android:textSize="16sp"
+                            android:textColor="#6A1B9A"
+                            android:layout_marginBottom="4dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/tvSistolica"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:gravity="center"
+                            android:text="120"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textColor="#1C1B1F"
+                            android:background="@drawable/presion_circulo_valor"/>
+
+                        <TextView
+                            android:id="@+id/arrowDownSistolica"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textSize="16sp"
+                            android:textColor="#6A1B9A"
+                            android:layout_marginTop="4dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </LinearLayout>
+
+                    <!-- Diastólica -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/arrowUpDiastolica"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▲"
+                            android:textSize="16sp"
+                            android:textColor="#6A1B9A"
+                            android:layout_marginBottom="4dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/tvDiastolica"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:gravity="center"
+                            android:text="80"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textColor="#1C1B1F"
+                            android:background="@drawable/presion_circulo_valor"/>
+
+                        <TextView
+                            android:id="@+id/arrowDownDiastolica"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textSize="16sp"
+                            android:textColor="#6A1B9A"
+                            android:layout_marginTop="4dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </LinearLayout>
+
+                    <!-- Pulso -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/arrowUpPulso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▲"
+                            android:textSize="16sp"
+                            android:textColor="#6A1B9A"
+                            android:layout_marginBottom="4dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/tvPulso"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:gravity="center"
+                            android:text="72"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textColor="#1C1B1F"
+                            android:background="@drawable/presion_circulo_valor"/>
+
+                        <TextView
+                            android:id="@+id/arrowDownPulso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textSize="16sp"
+                            android:textColor="#6A1B9A"
+                            android:layout_marginTop="4dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Brazo utilizado -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Brazo Utilizado:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#1C1B1F"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/rgBrazo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbIzquierdo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Brazo Izquierdo"
+                        android:textSize="13sp"
+                        android:textColor="#1C1B1F"
+                        android:buttonTint="#6A1B9A"
+                        android:checked="true"/>
+
+                    <RadioButton
+                        android:id="@+id/rbDerecho"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Brazo Derecho"
+                        android:textSize="13sp"
+                        android:textColor="#1C1B1F"
+                        android:buttonTint="#6A1B9A"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <!-- Boton analizar -->
+            <Button
+                android:id="@+id/btnAnalizar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/presion_boton_analizar"
+                android:backgroundTint="@null"
+                android:text="ANALIZAR MEDICIÓN"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:stateListAnimator="@null"/>
+
+            <!--Tarjeta de resumen -->
+            <LinearLayout
+                android:id="@+id/cardResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/presion_tarjeta_resultado"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:elevation="4dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RESUMEN Y ANÁLISIS"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#1C1B1F"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Datos del resultado -->
+                <TextView
+                    android:id="@+id/txtResultado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Separador -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Clasificación -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CLASIFICACIÓN:"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#1C1B1F"
+                        android:layout_marginEnd="12dp"/>
+
+                    <TextView
+                        android:id="@+id/txtClasificacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NORMAL"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="6dp"
+                        android:background="@drawable/presion_etiqueta_verde"/>
+                </LinearLayout>
+
+                <!-- Tip informativo -->
+                <LinearLayout
+                    android:id="@+id/layoutTip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/presion_consejo_info"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:text="ℹ️"
+                        android:textSize="16sp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/txtTip"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Su presión está en un rango saludable.\nMantenga un estilo de vida activo."
+                        android:textSize="12sp"
+                        android:textColor="#2E7D32"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
