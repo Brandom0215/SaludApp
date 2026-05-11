@@ -1,20 +1,19 @@
 package pa.ac.utp.miprimeraapp
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import java.text.SimpleDateFormat
 import java.util.*
 
 class Presion : AppCompatActivity() {
 
     // Vistas
-    private lateinit var btnFecha: LinearLayout
+    private lateinit var btnFecha: View
+    private lateinit var btnHora: View
     private lateinit var txtFecha: TextView
     private lateinit var txtHora: TextView
     private lateinit var tvSistolica: TextView
@@ -25,12 +24,13 @@ class Presion : AppCompatActivity() {
     private lateinit var txtResultado: TextView
     private lateinit var txtClasificacion: TextView
     private lateinit var txtTip: TextView
-    private lateinit var cardResultado: LinearLayout
+    private lateinit var cardResultado: View
     private lateinit var layoutTip: LinearLayout
 
 
     // Estado, los valores manuales
     private var fechaSeleccionada: String? = null
+    private var horaSeleccionada: String? = null
     private var valorSistolica = 120
     private var valorDiastolica = 80
     private var valorPulso = 72
@@ -40,15 +40,7 @@ class Presion : AppCompatActivity() {
     private val diastolicaMin = 40; private val diastolicaMax = 130
     private val pulsoMin = 40;      private val pulsoMax = 180
 
-    // Handler y Runnable como campos de clase para que no se pierdan
-    private val handler = Handler(Looper.getMainLooper())
-    private val relojRunnable = object : Runnable {
-        override fun run() {
-            val formato = SimpleDateFormat("HH:mm", Locale.getDefault())
-            txtHora.text = formato.format(Date())
-            handler.postDelayed(this, 1000)
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,18 +51,13 @@ class Presion : AppCompatActivity() {
         actualizarValores()
         configurarFlechas()
         configurarEventos()
-        iniciarReloj()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        handler.removeCallbacks(relojRunnable)
     }
 
 
     // Inicializar vistas
     private fun initViews() {
         btnFecha = findViewById(R.id.btnFecha)
+        btnHora = findViewById(R.id.btnHora)
         txtFecha = findViewById(R.id.txtFecha)
         txtHora = findViewById(R.id.txtHora)
 
@@ -148,6 +135,10 @@ class Presion : AppCompatActivity() {
             mostrarDatePicker()
         }
 
+        btnHora.setOnClickListener {
+            mostrarTimePicker()
+        }
+
         btnAnalizar.setOnClickListener {
             analizarMedicion()
         }
@@ -171,14 +162,27 @@ class Presion : AppCompatActivity() {
         dialog.show()
     }
 
-    // Reloj en tiempo real
-    private fun iniciarReloj() {
-        // Actualizar inmediatamente al iniciar
-        val formato = SimpleDateFormat("HH:mm", Locale.getDefault())
-        txtHora.text = formato.format(Date())
+    // TimePicker
+    private fun mostrarTimePicker() {
+        val calendario = Calendar.getInstance()
 
-        // Programar actualizaciones cada segundo
-        handler.post(relojRunnable)
+        // Usamos el tema predeterminado o uno que fuerce spinners si es necesario.
+        // Para que sea "horizontal" (spinner mode), a veces se requiere un tema específico.
+        val dialog = TimePickerDialog(
+            this,
+            android.R.style.Theme_Holo_Light_Dialog_NoActionBar, // Estilo clásico de spinners (horizontal)
+            { _, hour, minute ->
+                horaSeleccionada = String.format("%02d:%02d", hour, minute)
+                txtHora.text = horaSeleccionada
+            },
+            calendario.get(Calendar.HOUR_OF_DAY),
+            calendario.get(Calendar.MINUTE),
+            true // formato 24h
+        )
+
+        // Hacer el fondo transparente para el estilo Holo si es necesario
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
     }
 
     // Lógica principal
@@ -186,6 +190,11 @@ class Presion : AppCompatActivity() {
 
         if (fechaSeleccionada == null) {
             Toast.makeText(this, "Selecciona una fecha", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (horaSeleccionada == null) {
+            Toast.makeText(this, "Selecciona una hora", Toast.LENGTH_SHORT).show()
             return
         }
 

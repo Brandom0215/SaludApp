@@ -1,5 +1,6 @@
 package pa.ac.utp.miprimeraapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -27,6 +28,7 @@ class Peso : AppCompatActivity() {
         val tvPesoIdeal = findViewById<TextView>(R.id.tvPesoIdeal)
         val tvGrasa = findViewById<TextView>(R.id.tvGrasa)
         val tvClasificacion = findViewById<TextView>(R.id.tvClasificacion)
+        val btnVerHistorial = findViewById<Button>(R.id.btnVerHistorial)
 
         // Listeners para cambiar los Hints dinámicamente
         swPeso.setOnCheckedChangeListener { _, isChecked ->
@@ -72,6 +74,40 @@ class Peso : AppCompatActivity() {
             var peso = sPeso.toDouble()
             var estatura = sEstatura.toDouble()
 
+            // Validación de rangos realistas
+            if (edad < 1 || edad > 120) {
+                etEdad.error = "Edad entre 1 y 120 años"
+                return@setOnClickListener
+            }
+
+            if (swPeso.isChecked) {
+                // Libras: rango 4 - 660 lb
+                if (peso < 4 || peso > 660) {
+                    etPeso.error = "Peso entre 4 y 660 lb"
+                    return@setOnClickListener
+                }
+            } else {
+                // Kilogramos: rango 2 - 300 kg
+                if (peso < 2 || peso > 300) {
+                    etPeso.error = "Peso entre 2 y 300 kg"
+                    return@setOnClickListener
+                }
+            }
+
+            if (swEstatura.isChecked) {
+                // Pulgadas: rango 12 - 110 in
+                if (estatura < 12 || estatura > 110) {
+                    etEstatura.error = "Estatura entre 12 y 110 in"
+                    return@setOnClickListener
+                }
+            } else {
+                // Centímetros: rango 30 - 280 cm
+                if (estatura < 30 || estatura > 280) {
+                    etEstatura.error = "Estatura entre 30 y 280 cm"
+                    return@setOnClickListener
+                }
+            }
+
             // Normalización de Peso a KG si está en Libras
             if (swPeso.isChecked) {
                 peso *= 0.453592
@@ -97,6 +133,11 @@ class Peso : AppCompatActivity() {
 
             // Clasificacion
             tvClasificacion.text = categorizarIMC(imc)
+        }
+        // Botón Ver historial
+        btnVerHistorial.setOnClickListener {
+            val intent = Intent(this, Historial_peso::class.java)
+            startActivity(intent)
         }
     }
 }

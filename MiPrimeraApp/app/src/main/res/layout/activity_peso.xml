@@ -39,7 +39,9 @@
             android:background="@drawable/imput_round"
             android:hint="Ej. 25"
             android:inputType="number"
-            android:paddingHorizontal="16dp" />
+            android:paddingHorizontal="16dp"
+            android:textColor="#1C1B1F"
+            android:textColorHint="#999999" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +75,9 @@
             android:hint="Peso (Kg)"
             android:inputType="numberDecimal|numberSigned"
             android:minHeight="50dp"
-            android:paddingHorizontal="16dp" />
+            android:paddingHorizontal="16dp"
+            android:textColor="#1C1B1F"
+            android:textColorHint="#999999" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,7 +111,9 @@
             android:hint="Estatura (cm)"
             android:inputType="numberDecimal|numberSigned"
             android:minHeight="50dp"
-            android:paddingHorizontal="16dp" />
+            android:paddingHorizontal="16dp"
+            android:textColor="#1C1B1F"
+            android:textColorHint="#999999" />
 
         <Button
             android:id="@+id/btnCalcular"
@@ -123,7 +129,8 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:layout_marginBottom="26dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -231,6 +238,18 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/btnVerHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#1A4375"
+            android:text="Ver historial"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            />
 
     </LinearLayout>
 </ScrollView>

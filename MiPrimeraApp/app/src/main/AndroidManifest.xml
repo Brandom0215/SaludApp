@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiPrimeraApp">
         <activity
+            android:name=".Historial_peso"
+            android:exported="false" />
+        <activity
             android:name=".Medicacion"
             android:exported="false" />
         <activity

@@ -1,7 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MiPrimeraApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Paleta azul general de la app -->
+        <item name="colorPrimary">#1A4375</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#D4E3F5</item>
+        <item name="colorOnPrimaryContainer">#0A1D33</item>
+        <item name="colorSecondary">#5E7A9D</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
     </style>
 </resources>
