@@ -1,20 +1,386 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6F0FA"
+    android:background="#EDF1F6"
+    android:fillViewport="true"
     tools:context=".Glucosa">
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="138dp"
-        android:layout_height="151dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_glucosa" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Barra Superior (AppBar) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/presion_encabezado"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="40dp"
+            android:paddingBottom="16dp"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Icono Glucosa"
+                app:srcCompat="@drawable/ic_glucosa" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AÑADIR NUEVO REGISTRO"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Subtítulo con fecha y hora dinámicas -->
+        <TextView
+            android:id="@+id/tvFechaRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center"
+            android:text="REGISTRO: Hoy - Martes, 19 Octubre | 12:48 PM"
+            android:textColor="#1A4375"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- Contenedor del Formulario y Cards -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- Fila superior: Valor de Glucosa y Tipo de Registro -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:layout_marginTop="8dp">
+
+                <!-- Tarjeta Valor de Glucosa (Izquierda) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="VALOR DE GLUCOSA"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#5E7A9D"
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center"/>
+
+                        <!-- Entrada grande y mg/dL -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp">
+
+                            <EditText
+                                android:id="@+id/etGlucosaValor"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:hint="---"
+                                android:textColorHint="#BDC3C7"
+                                android:inputType="number"
+                                android:textSize="34sp"
+                                android:textStyle="bold"
+                                android:textColor="#1A4375"
+                                android:background="@null"
+                                android:gravity="center"
+                                android:maxLength="3"
+                                android:importantForAutofill="no"/>
+
+                            <!-- Separador vertical -->
+                            <View
+                                android:layout_width="1.5dp"
+                                android:layout_height="36dp"
+                                android:background="#D1D9E6"
+                                android:layout_marginHorizontal="6dp"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="mg/dL"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1A4375"
+                                android:gravity="start|center_vertical"/>
+                        </LinearLayout>
+
+                        <!-- Texto placeholder abajo -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ingresar Valor"
+                            android:textSize="11sp"
+                            android:textColor="#7F8C8D"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Tarjeta Tipo de Registro (Derecha) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TIPO DE REGISTRO"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#5E7A9D"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="12dp"/>
+
+                        <RadioGroup
+                            android:id="@+id/rgTipoRegistro"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/rbAyunas"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ayunas"
+                                android:textSize="12.5sp"
+                                android:textColor="#1C1B1F"
+                                android:buttonTint="#1A4375"
+                                android:paddingVertical="8dp"
+                                android:paddingStart="8dp"
+                                android:drawablePadding="12dp"
+                                android:gravity="center_vertical"
+                                android:checked="true"/>
+
+                            <RadioButton
+                                android:id="@+id/rbAntesAlmuerzo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Antes de Almuerzo"
+                                android:textSize="12.5sp"
+                                android:textColor="#1C1B1F"
+                                android:buttonTint="#1A4375"
+                                android:paddingVertical="8dp"
+                                android:paddingStart="8dp"
+                                android:drawablePadding="12dp"
+                                android:gravity="center_vertical"/>
+
+                            <RadioButton
+                                android:id="@+id/rbDespuesAlmuerzo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Después de Almuerzo"
+                                android:textSize="12.5sp"
+                                android:textColor="#1C1B1F"
+                                android:buttonTint="#1A4375"
+                                android:paddingVertical="8dp"
+                                android:paddingStart="8dp"
+                                android:drawablePadding="12dp"
+                                android:gravity="center_vertical"/>
+
+                            <RadioButton
+                                android:id="@+id/rbCena"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Cena"
+                                android:textSize="12.5sp"
+                                android:textColor="#1C1B1F"
+                                android:buttonTint="#1A4375"
+                                android:paddingVertical="8dp"
+                                android:paddingStart="8dp"
+                                android:drawablePadding="12dp"
+                                android:gravity="center_vertical"/>
+                        </RadioGroup>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Sección: Notas Opcionales (Colapsable) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Encabezado de notas clickeable para colapsar -->
+                    <LinearLayout
+                        android:id="@+id/layoutCabeceraNotas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="NOTAS OPCIONALES"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#1C1B1F"/>
+
+                        <TextView
+                            android:id="@+id/tvFlechaNotas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▲"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A4375"/>
+                    </LinearLayout>
+
+                    <!-- Cuerpo colapsable -->
+                    <LinearLayout
+                        android:id="@+id/layoutCuerpoNotas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Separador -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#E0E0E0"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="12dp" />
+
+                        <EditText
+                            android:id="@+id/etNotas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:gravity="top|start"
+                            android:background="@drawable/imput_round"
+                            android:hint="Añadir notas..."
+                            android:textColorHint="#999999"
+                            android:textColor="#1C1B1F"
+                            android:textSize="13sp"
+                            android:padding="12dp"
+                            android:inputType="textMultiLine"
+                            android:importantForAutofill="no" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección: Resumen Previo (Tarjeta) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RESUMEN PREVIO"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#1C1B1F"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Última lectura: 124 mg/dL"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#333333"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="(Antes de almuerzo; 12:48 PM)"
+                        android:textSize="11sp"
+                        android:textColor="#666666"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Botón de Acción -->
+            <Button
+                android:id="@+id/btnGuardarRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#2E7D32"
+                android:text="+ GUARDAR REGISTRO"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                android:stateListAnimator="@null"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
