@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:background="@drawable/imput_round"
+    android:backgroundTint="#FFFFFF"
+    android:layout_marginBottom="8dp">
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/silueta"
+        app:tint="#00A8FF"
+        android:layout_marginEnd="16dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoy"
+            android:textColor="#1A4375"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvVasos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8 Vasos (2000 ml)"
+            android:textColor="#5E7A9D"
+            android:textSize="14sp" />
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/tvMeta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Meta Cumplida!"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+</LinearLayout>

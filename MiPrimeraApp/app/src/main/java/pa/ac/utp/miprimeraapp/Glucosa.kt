@@ -135,7 +135,7 @@ class Glucosa : AppCompatActivity() {
             val rbSeleccionado = findViewById<RadioButton>(idRadioSeleccionado)
             val tipoCompleto = rbSeleccionado?.text?.toString() ?: "Ayunas"
             
-            // Extraer el texto limpio quitando el emoji si existiera
+            // Extraer el texto
             val tipoSeleccionado = if (tipoCompleto.contains("  ")) {
                 tipoCompleto.substringAfter("  ").trim()
             } else {
