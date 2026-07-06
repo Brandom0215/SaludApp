@@ -1,6 +1,8 @@
 package pa.ac.utp.miprimeraapp
 
 import android.os.Bundle
+import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +14,9 @@ import java.util.*
 
 class Glucosa : AppCompatActivity() {
 
+    private lateinit var dbHelper: DatabaseHelper
+    private var currentUserId: Long = -1L
+
     // Vistas
     private lateinit var tvFechaRegistro: TextView
     private lateinit var etGlucosaValor: EditText
@@ -21,6 +26,10 @@ class Glucosa : AppCompatActivity() {
     private lateinit var tvFlechaNotas: TextView
     private lateinit var etNotas: EditText
     private lateinit var btnGuardarRegistro: Button
+
+    private lateinit var cardResumenPrevio: View
+    private lateinit var tvResumenLectura: TextView
+    private lateinit var tvResumenContexto: TextView
 
     // Estado del panel colapsable
     private var notasExpandidas = true
@@ -38,11 +47,14 @@ class Glucosa : AppCompatActivity() {
         if (vistaPrincipal != null) {
             ViewCompat.setOnApplyWindowInsetsListener(vistaPrincipal) { v, insets ->
                 val barrasSistema = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                // Ajustamos el padding superior a 0 para que la AppBar ocupe el área de la barra de estado
-                v.setPadding(barrasSistema.left, 0, barrasSistema.right, barrasSistema.bottom)
+                v.setPadding(barrasSistema.left, barrasSistema.top, barrasSistema.right, barrasSistema.bottom)
                 insets
             }
         }
+
+        dbHelper = DatabaseHelper(this)
+        val prefs = getSharedPreferences("SaludAppPrefs", Context.MODE_PRIVATE)
+        currentUserId = prefs.getLong("user_id", -1L)
 
         // Inicializar vistas
         inicializarVistas()
@@ -69,6 +81,28 @@ class Glucosa : AppCompatActivity() {
         tvFlechaNotas = findViewById(R.id.tvFlechaNotas)
         etNotas = findViewById(R.id.etNotas)
         btnGuardarRegistro = findViewById(R.id.btnGuardarRegistro)
+        
+        cardResumenPrevio = findViewById(R.id.cardResumenPrevio)
+        tvResumenLectura = findViewById(R.id.tvResumenLectura)
+        tvResumenContexto = findViewById(R.id.tvResumenContexto)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cargarResumenPrevio()
+    }
+
+    private fun cargarResumenPrevio() {
+        if (currentUserId == -1L) return
+        val historial = dbHelper.obtenerHistorialGlucosa(currentUserId)
+        val ultimo = historial.firstOrNull()
+        if (ultimo != null) {
+            cardResumenPrevio.visibility = View.VISIBLE
+            tvResumenLectura.text = "Última lectura: ${ultimo.valor} mg/dL"
+            tvResumenContexto.text = "(${ultimo.tipo}; ${ultimo.fecha})"
+        } else {
+            cardResumenPrevio.visibility = View.GONE
+        }
     }
 
     private fun configurarFechaYHora() {
@@ -154,8 +188,22 @@ class Glucosa : AppCompatActivity() {
                 Notas: $notasFinal
             """.trimIndent()
 
-            // 5. Mostrar retroalimentación inmediata mediante un Toast de Android
-            Toast.makeText(this, mensajeResumen, Toast.LENGTH_LONG).show()
+            // 5. Guardar en Base de Datos
+            val valor = valorIngresado.toIntOrNull() ?: 0
+            if (currentUserId != -1L) {
+                dbHelper.registrarGlucosa(currentUserId, valor, tipoSeleccionado, notasFinal)
+                Toast.makeText(this, mensajeResumen, Toast.LENGTH_LONG).show()
+                cargarResumenPrevio()
+                // finish() // Opcionalmente regresar
+            } else {
+                Toast.makeText(this, "Error: Usuario no encontrado", Toast.LENGTH_SHORT).show()
+            }
+        }
+        
+        val btnVerHistorial = findViewById<Button>(R.id.btnVerHistorial)
+        btnVerHistorial.setOnClickListener {
+            val intent = Intent(this, Historial_glucosa::class.java)
+            startActivity(intent)
         }
     }
 

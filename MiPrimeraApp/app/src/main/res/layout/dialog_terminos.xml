@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFF"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvTerminosTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Aviso de Privacidad y Términos de Uso"
+        android:textColor="#1A4375"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="En cumplimiento de la Ley N° 81 de 26 de marzo de 2019 (Ley de Protección de Datos Personales) de la República de Panamá, se establece el siguiente Aviso de Privacidad:\n\n1. Consentimiento: Al usar esta aplicación, aceptas la recolección y tratamiento de tus datos personales, incluyendo datos sensibles (salud, peso, presión arterial, medicamentos, etc.) con el único fin de proveer un monitoreo personal de tu bienestar.\n\n2. Finalidad y Uso: Los datos recopilados son utilizados exclusivamente para el funcionamiento de los módulos de la aplicación. No compartimos, vendemos, ni transferimos tu información a terceros.\n\n3. Seguridad: Tus datos se almacenan de forma local en tu dispositivo, utilizando encriptación avanzada (SQLCipher) para proteger tu confidencialidad. El acceso a la app requiere validación biométrica.\n\n4. Derechos ARCO: En la sección 'Perfil', puedes ejercer en cualquier momento tu derecho a acceder, rectificar o cancelar (eliminar) por completo tu información de la base de datos local."
+            android:textColor="#5E7A9D"
+            android:textSize="14sp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnCerrarTerminos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#1A4375"
+        android:text="Cerrar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:cornerRadius="16dp" />
+
+</LinearLayout>

@@ -2,4 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Background Gradients -->
+    <color name="bg_gradient_start">#2193b0</color>
+    <color name="bg_gradient_end">#6dd5ed</color>
+    
+    <!-- Glassmorphism Colors -->
+    <color name="glass_bg">#33FFFFFF</color> <!-- 20% White -->
+    <color name="glass_border">#66FFFFFF</color> <!-- 40% White -->
+    
+    <color name="blue_bg">#E4F1F9</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#757575</color>
 </resources>

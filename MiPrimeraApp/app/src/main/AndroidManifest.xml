@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -30,9 +36,6 @@
             android:name=".Actividad"
             android:exported="false" />
         <activity
-            android:name=".AgregarActividad"
-            android:exported="false" />
-        <activity
             android:name=".Glucosa"
             android:exported="false" />
         <activity
@@ -51,6 +54,35 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Historial_presion"
+            android:exported="false" />
+        <activity
+            android:name=".Historial_glucosa"
+            android:exported="false" />
+        <activity
+            android:name=".Historial_actividad"
+            android:exported="false" />
+            
+        <service
+            android:name=".services.StepCounterService"
+            android:foregroundServiceType="health"
+            android:exported="false" />
+
+        <receiver
+            android:name=".services.HidratacionReceiver"
+            android:exported="false" />
+            
+        <receiver
+            android:name=".services.MedicamentoReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

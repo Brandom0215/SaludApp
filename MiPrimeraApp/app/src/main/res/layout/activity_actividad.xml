@@ -4,49 +4,50 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDF1F6"
+
+    android:background="#E4F1F9"
     android:orientation="vertical">
+
+    <!-- Barra Superior (AppBar) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/btnRegresar"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Icono Actividad"
+            app:srcCompat="@drawable/ic_actividad"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTROL DE ACTIVIDAD"
+            android:textColor="#1A4375"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true">
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp">
-
-            <!-- Header -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp">
-
-                <ImageView
-                    android:id="@+id/btnRegresar"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_flecha_regresar"
-                    android:paddingEnd="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Control de Actividad"
-                    android:textColor="#1A4375"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_marginEnd="32dp" />
-            </LinearLayout>
 
             <!-- Daily Goal Card -->
             <com.google.android.material.card.MaterialCardView
@@ -60,17 +61,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:background="#FFFFFF"
-                    android:padding="24dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="24dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="META DIARIA"
-                        android:textColor="#5E7A9D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -79,15 +80,15 @@
                         android:layout_width="160dp"
                         android:layout_height="160dp"
                         android:layout_marginBottom="24dp">
-                        
+
                         <!-- Background ring -->
                         <ProgressBar
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:progressDrawable="@drawable/circle_progress_bg"
                             android:max="100"
-                            android:progress="100" />
+                            android:progress="100"
+                            android:progressDrawable="@drawable/circle_progress_bg" />
 
                         <!-- Foreground ring -->
                         <ProgressBar
@@ -95,9 +96,9 @@
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:progressDrawable="@drawable/circle_progress_fg"
                             android:max="100"
-                            android:progress="0" />
+                            android:progress="0"
+                            android:progressDrawable="@drawable/circle_progress_fg" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -111,7 +112,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0%"
-                                android:textColor="#1A4375"
+                                android:textColor="@color/text_primary"
                                 android:textSize="40sp"
                                 android:textStyle="bold" />
 
@@ -119,7 +120,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Completado"
-                                android:textColor="#5E7A9D"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -128,92 +129,101 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center"
+                        android:orientation="horizontal"
                         android:weightSum="3">
 
                         <!-- Pasos -->
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="vertical">
+
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_pasos"
-                                android:layout_marginBottom="8dp"/>
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/ic_pasos" />
+
                             <TextView
                                 android:id="@+id/tvPasos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
-                                android:textColor="#1A4375"
+                                android:textColor="@color/text_primary"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pasos"
-                                android:textColor="#5E7A9D"
-                                android:textSize="12sp"/>
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <!-- Kcal -->
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="vertical">
+
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_fuego"
-                                android:layout_marginBottom="8dp"/>
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/ic_fuego" />
+
                             <TextView
                                 android:id="@+id/tvKcal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
-                                android:textColor="#1A4375"
+                                android:textColor="@color/text_primary"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Kcal"
-                                android:textColor="#5E7A9D"
-                                android:textSize="12sp"/>
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <!-- Minutos -->
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="vertical">
+
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_reloj"
-                                android:layout_marginBottom="8dp"/>
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/ic_reloj" />
+
                             <TextView
                                 android:id="@+id/tvMinutos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
-                                android:textColor="#1A4375"
+                                android:textColor="@color/text_primary"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Minutos"
-                                android:textColor="#5E7A9D"
-                                android:textSize="12sp"/>
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -223,11 +233,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="Actividad Semanal"
-                android:textColor="#1A4375"
+                android:textColor="@color/text_primary"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
+                android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -241,83 +251,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
+                    android:gravity="bottom"
                     android:orientation="horizontal"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="12dp"
                     android:paddingHorizontal="16dp"
-                    android:gravity="bottom">
-                    
-                    <!-- Simulating a bar chart -->
-                    <!-- Monday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="40dp" android:background="#1A4375" android:backgroundTint="#801A4375"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="L" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <!-- Tuesday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="60dp" android:background="#1A4375" android:backgroundTint="#801A4375"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="M" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <!-- Wednesday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="30dp" android:background="#1A4375" android:backgroundTint="#801A4375"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="M" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <!-- Thursday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="80dp" android:background="#1A4375" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="J" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp" android:textStyle="bold"/>
-                    </LinearLayout>
-                    <!-- Friday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="50dp" android:background="#1A4375" android:backgroundTint="#801A4375"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="V" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <!-- Saturday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="20dp" android:background="#1A4375" android:backgroundTint="#801A4375"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <!-- Sunday -->
-                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="bottom|center_horizontal" android:orientation="vertical">
-                        <View android:layout_width="12dp" android:layout_height="40dp" android:background="#1A4375" android:backgroundTint="#801A4375"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D" android:textColor="#1A4375" android:textSize="12sp" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
+                    android:paddingTop="24dp"
+                    android:paddingBottom="12dp">
+
+                    <!-- MPAndroidChart BarChart -->
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- List of Activities -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tus actividades de hoy"
-                android:textColor="#1A4375"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Using a LinearLayout here instead of ListView because we are inside a ScrollView -->
-            <LinearLayout
-                android:id="@+id/llActividadesList"
+            <Button
+                android:id="@+id/btnVerHistorial"
+                style="@style/GlassButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp" />
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#1A4375"
+                android:text="Ver Historial"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
 
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnAgregarActividad"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#1A4375"
-        android:text="+ Registrar Ejercicio"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:cornerRadius="16dp" />
-
 </LinearLayout>
+
+
+

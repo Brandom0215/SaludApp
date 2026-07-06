@@ -11,6 +11,10 @@ import androidx.core.view.WindowInsetsCompat
 data class RegistroHidratacion(val fecha: String, val vasos: Int, val mililitros: Int, val metaCumplida: Boolean)
 
 class Historial_hidratacion : AppCompatActivity() {
+
+    private lateinit var dbHelper: DatabaseHelper
+    private var currentUserId: Long = -1L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,23 +25,32 @@ class Historial_hidratacion : AppCompatActivity() {
             insets
         }
 
-        val btnRegresar = findViewById<ImageView>(R.id.btnRegresar)
-        btnRegresar.setOnClickListener {
-            finish()
-        }
+        dbHelper = DatabaseHelper(this)
+        val prefs = getSharedPreferences("SaludAppPrefs", android.content.Context.MODE_PRIVATE)
+        currentUserId = prefs.getLong("user_id", -1L)
 
-        val listaRegistros = listOf(
-            RegistroHidratacion("Hoy", 8, 2000, true),
-            RegistroHidratacion("Ayer", 6, 1500, false),
-            RegistroHidratacion("19/06/2024", 8, 2000, true),
-            RegistroHidratacion("18/06/2024", 5, 1250, false),
-            RegistroHidratacion("17/06/2024", 10, 2500, true),
-            RegistroHidratacion("16/06/2024", 7, 1750, false),
-            RegistroHidratacion("15/06/2024", 8, 2000, true)
-        )
+        cargarHistorial()
+    }
+
+    private fun cargarHistorial() {
+        val peso = dbHelper.obtenerUltimoPeso(currentUserId)
+        val metaMl = if (peso != null) (peso * 35).toInt() else 2000
+
+        val listaRegistrosDB = dbHelper.obtenerHistorialHidratacion(currentUserId)
 
         val lvHistorialHidratacion = findViewById<ListView>(R.id.lvHistorialHidratacion)
-        val adapter = HidratacionAdapter(this, listaRegistros)
+        val adapter = HidratacionAdapter(this, listaRegistrosDB, metaMl) { position ->
+            val registroId = listaRegistrosDB[position].id
+            android.app.AlertDialog.Builder(this)
+                .setTitle("Eliminar registro")
+                .setMessage("¿Deseas eliminar este registro de hidratación?")
+                .setPositiveButton("Sí") { _, _ ->
+                    dbHelper.eliminarHidratacion(registroId)
+                    cargarHistorial()
+                }
+                .setNegativeButton("No", null)
+                .show()
+        }
         lvHistorialHidratacion.adapter = adapter
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    
+    android:gravity="center_horizontal">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp">
+
+        <ImageView
+            android:id="@+id/btnRegresar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_flecha_regresar"
+            android:paddingEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mi Perfil"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginEnd="32dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_peso"
+        app:tint="#1A4375"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        android:textColor="@color/text_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="48dp" />
+
+    <!-- Logout -->
+    <Button style="@style/GlassButtonStyle"
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Cerrar Sesión"
+        android:backgroundTint="#5E7A9D"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Derechos ARCO: Eliminar Cuenta -->
+    <Button style="@style/GlassButtonStyle"
+        android:id="@+id/btnDeleteAccount"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Eliminar mi Cuenta y Datos (ARCO)"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Al eliminar tu cuenta, todos tus registros de salud y tu bitácora serán eliminados permanentemente del dispositivo."
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:paddingHorizontal="16dp" />
+
+</LinearLayout>
+
+
