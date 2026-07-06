@@ -9,18 +9,33 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.appcompat.widget.SwitchCompat
 
+import android.content.Context
 class Peso : AppCompatActivity() {
+    
+    private lateinit var dbHelper: DatabaseHelper
+    private var currentUserId: Long = -1L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_peso)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        dbHelper = DatabaseHelper(this)
+        val prefs = getSharedPreferences("SaludAppPrefs", Context.MODE_PRIVATE)
+        currentUserId = prefs.getLong("user_id", -1L)
 
        // Se localiza cada elemento visual del diseño xml y lo guardaamos en una variable de Kotlin
-        val etEdad = findViewById<EditText>(R.id.etEdad)
-        val etPeso = findViewById<EditText>(R.id.etPeso)
-        val etEstatura = findViewById<EditText>(R.id.etEstatura)
+        val etEdad = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etEdad)
+        val etPeso = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etPeso)
+        val etEstatura = findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.etEstatura)
         val swPeso = findViewById<SwitchCompat>(R.id.swPesoUnit)
         val swEstatura = findViewById<SwitchCompat>(R.id.swEstaturaUnit)
         val btnCalcular = findViewById<Button>(R.id.btnCalcular)
@@ -33,11 +48,11 @@ class Peso : AppCompatActivity() {
         // Listeners para cambiar los Hints dinámicamente
         swPeso.setOnCheckedChangeListener { _, isChecked ->
             etPeso.hint = if (isChecked) "Peso (Lb)" else "Peso (Kg)"
-            etPeso.text.clear()
+            etPeso.text?.clear()
         }
         swEstatura.setOnCheckedChangeListener { _, isChecked ->
             etEstatura.hint = if (isChecked) "Estatura (in)" else "Estatura (cm)"
-            etEstatura.text.clear()
+            etEstatura.text?.clear()
         }
 
 
@@ -133,6 +148,24 @@ class Peso : AppCompatActivity() {
 
             // Clasificacion
             tvClasificacion.text = categorizarIMC(imc)
+            
+            // Color de resultados
+            val colorRes = when {
+                imc < 18.5 -> android.graphics.Color.parseColor("#FFC107") // Amarillo
+                imc < 25 -> android.graphics.Color.parseColor("#4CAF50") // Verde
+                imc < 30 -> android.graphics.Color.parseColor("#FF9800") // Naranja
+                else -> android.graphics.Color.parseColor("#F44336") // Rojo
+            }
+            tvIMC.setTextColor(colorRes)
+            tvPesoIdeal.setTextColor(colorRes)
+            tvGrasa.setTextColor(colorRes)
+            tvClasificacion.setTextColor(colorRes)
+
+            // Guardar en la Base de Datos
+            if (currentUserId != -1L) {
+                dbHelper.registrarPeso(currentUserId, peso, imc)
+                Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show()
+            }
         }
         // Botón Ver historial
         btnVerHistorial.setOnClickListener {

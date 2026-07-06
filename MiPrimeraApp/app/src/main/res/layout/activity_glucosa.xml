@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDF1F6"
+    
     android:fillViewport="true"
     tools:context=".Glucosa">
 
@@ -18,10 +18,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/presion_encabezado"
+            
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="40dp"
+            
             android:paddingBottom="16dp"
             android:paddingHorizontal="16dp">
 
@@ -36,8 +36,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AÑADIR NUEVO REGISTRO"
-                android:textColor="#FFFFFF"
+                android:text="CONTROL DE GLUCOSA"
+                android:textColor="#1A4375"
                 android:textSize="17sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -52,7 +52,7 @@
             android:layout_marginHorizontal="16dp"
             android:gravity="center"
             android:text="REGISTRO: Hoy - Martes, 19 Octubre | 12:48 PM"
-            android:textColor="#1A4375"
+            android:textColor="@color/text_primary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -97,7 +97,7 @@
                             android:text="VALOR DE GLUCOSA"
                             android:textSize="11sp"
                             android:textStyle="bold"
-                            android:textColor="#5E7A9D"
+                            android:textColor="@color/text_secondary"
                             android:layout_marginBottom="16dp"
                             android:gravity="center"/>
 
@@ -119,7 +119,7 @@
                                 android:inputType="number"
                                 android:textSize="34sp"
                                 android:textStyle="bold"
-                                android:textColor="#1A4375"
+                                android:textColor="@color/text_primary"
                                 android:background="@null"
                                 android:gravity="center"
                                 android:maxLength="3"
@@ -139,7 +139,7 @@
                                 android:text="mg/dL"
                                 android:textSize="15sp"
                                 android:textStyle="bold"
-                                android:textColor="#1A4375"
+                                android:textColor="@color/text_primary"
                                 android:gravity="start|center_vertical"/>
                         </LinearLayout>
 
@@ -178,7 +178,7 @@
                             android:text="TIPO DE REGISTRO"
                             android:textSize="11sp"
                             android:textStyle="bold"
-                            android:textColor="#5E7A9D"
+                            android:textColor="@color/text_secondary"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="12dp"/>
 
@@ -288,7 +288,7 @@
                             android:text="▲"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            android:textColor="#1A4375"/>
+                            android:textColor="@color/text_primary"/>
                     </LinearLayout>
 
                     <!-- Cuerpo colapsable -->
@@ -306,26 +306,31 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="12dp" />
 
-                        <EditText
-                            android:id="@+id/etNotas"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/GlassInputStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:minHeight="80dp"
-                            android:gravity="top|start"
-                            android:background="@drawable/imput_round"
-                            android:hint="Añadir notas..."
-                            android:textColorHint="#999999"
-                            android:textColor="#1C1B1F"
-                            android:textSize="13sp"
-                            android:padding="12dp"
-                            android:inputType="textMultiLine"
-                            android:importantForAutofill="no" />
+                            
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etNotas"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="80dp"
+                                android:maxLength="200"
+                                android:gravity="top|start"
+                                android:hint="Añadir notas..."
+                                android:textColor="@color/text_primary"
+                                android:inputType="textMultiLine" />
+                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Sección: Resumen Previo (Tarjeta) -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardResumenPrevio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -333,7 +338,8 @@
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:strokeColor="#E0E0E0"
-                app:strokeWidth="1dp">
+                app:strokeWidth="1dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -351,17 +357,19 @@
                         android:layout_marginBottom="8dp"/>
 
                     <TextView
+                        android:id="@+id/tvResumenLectura"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Última lectura: 124 mg/dL"
+                        android:text="Última lectura: --"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        android:textColor="#333333"/>
+                        android:textColor="@color/text_primary"/>
 
                     <TextView
+                        android:id="@+id/tvResumenContexto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="(Antes de almuerzo; 12:48 PM)"
+                        android:text=""
                         android:textSize="11sp"
                         android:textColor="#666666"
                         android:layout_marginTop="2dp"/>
@@ -369,13 +377,26 @@
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Botón de Acción -->
-            <Button
+            <Button style="@style/GlassButtonStyle"
                 android:id="@+id/btnGuardarRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="#2E7D32"
+                android:backgroundTint="#1A4375"
                 android:text="+ GUARDAR REGISTRO"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                android:stateListAnimator="@null"/>
+
+            <Button style="@style/GlassButtonStyle"
+                android:id="@+id/btnVerHistorial"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#1A4375"
+                android:text="VER HISTORIAL"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -384,3 +405,6 @@
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+
+
+

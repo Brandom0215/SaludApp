@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E4EEF7"
+
+    android:background="#E4F1F9"
     tools:context=".Splash">
 
     <ImageView
@@ -19,5 +20,6 @@
         app:srcCompat="@drawable/saludapplogo" />
 
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

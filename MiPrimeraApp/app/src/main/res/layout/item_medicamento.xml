@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Paracetamol 500mg"
-                    android:textColor="#1A4375"
+                    android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="08:00 AM - 1 Pastilla"
-                    android:textColor="#5E7A9D"
+                    android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
             </LinearLayout>
             
@@ -67,3 +67,5 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
+
+

@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.ImageView
 
 class HidratacionAdapter(
     private val context: Context,
-    private val dataSource: List<RegistroHidratacion>
+    private val dataSource: List<RegistroHidratacionDB>,
+    private val metaMl: Int,
+    private val onDeleteClick: (Int) -> Unit
 ) : BaseAdapter() {
 
     override fun getCount(): Int {
@@ -28,22 +31,28 @@ class HidratacionAdapter(
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_historial_hidratacion, parent, false)
 
-        val registro = getItem(position) as RegistroHidratacion
+        val registro = getItem(position) as RegistroHidratacionDB
 
         val tvFecha = view.findViewById<TextView>(R.id.tvFecha)
         val tvVasos = view.findViewById<TextView>(R.id.tvVasos)
         val tvMeta = view.findViewById<TextView>(R.id.tvMeta)
 
         tvFecha.text = registro.fecha
-        tvVasos.text = "${registro.vasos} Vasos (${registro.mililitros} ml)"
+        val mililitros = registro.vasos // La BD ahora devuelve ml en el campo vasos
+        tvVasos.text = "${mililitros} ml"
 
-        if (registro.metaCumplida) {
+        if (mililitros >= metaMl) {
             tvMeta.text = "¡Meta Cumplida!"
             tvMeta.setTextColor(Color.parseColor("#4CAF50"))
         } else {
-            val faltan = 8 - registro.vasos
-            tvMeta.text = "- $faltan Vasos"
+            val faltan = metaMl - mililitros
+            tvMeta.text = "- $faltan ml"
             tvMeta.setTextColor(Color.parseColor("#E74C3C"))
+        }
+
+        val btnEliminar = view.findViewById<ImageView>(R.id.btnEliminar)
+        btnEliminar.setOnClickListener {
+            onDeleteClick(position)
         }
 
         return view

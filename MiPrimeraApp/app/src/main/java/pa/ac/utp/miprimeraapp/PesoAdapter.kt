@@ -9,8 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import java.util.Locale
 
-class PesoAdapter(private val context: Context, private val data: List<RegistroPeso>) :
-    BaseAdapter() {
+class PesoAdapter(
+    private val context: Context, 
+    private val data: List<RegistroPeso>,
+    private val onDeleteClick: (Int) -> Unit
+) : BaseAdapter() {
 
     override fun getCount(): Int = data.size
     override fun getItem(position: Int): Any = data[position]
@@ -49,6 +52,11 @@ class PesoAdapter(private val context: Context, private val data: List<RegistroP
         } else {
             // Fallback: icono por defecto si no se encuentran las imágenes
             ivIcono.setImageResource(android.R.drawable.ic_menu_info_details)
+        }
+
+        val btnEliminar = view.findViewById<ImageView>(R.id.btnEliminar)
+        btnEliminar.setOnClickListener {
+            onDeleteClick(position)
         }
 
         return view

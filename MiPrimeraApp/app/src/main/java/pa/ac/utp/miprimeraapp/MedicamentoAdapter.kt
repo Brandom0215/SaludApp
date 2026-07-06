@@ -10,7 +10,7 @@ import android.widget.TextView
 
 class MedicamentoAdapter(
     private val context: Context,
-    private val dataSource: MutableList<RegistroMedicamento>,
+    private val dataSource: MutableList<RegistroMedicamentoDB>,
     private val onAction: (Int, String) -> Unit
 ) : BaseAdapter() {
 
@@ -21,7 +21,7 @@ class MedicamentoAdapter(
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_medicamento, parent, false)
 
-        val registro = getItem(position) as RegistroMedicamento
+        val registro = getItem(position) as RegistroMedicamentoDB
 
         val tvNombreMed = view.findViewById<TextView>(R.id.tvNombreMed)
         val tvDosisHora = view.findViewById<TextView>(R.id.tvDosisHora)

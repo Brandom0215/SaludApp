@@ -1,15 +1,22 @@
 package pa.ac.utp.miprimeraapp
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+
+
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import java.util.*
 
+import android.content.Context
+
 class Presion : AppCompatActivity() {
+
+    private lateinit var dbHelper: DatabaseHelper
+    private var currentUserId: Long = -1L
 
     // Vistas
     private lateinit var btnFecha: View
@@ -46,6 +53,18 @@ class Presion : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_presion)
+        val vistaPrincipal = findViewById<View>(R.id.main)
+        if (vistaPrincipal != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(vistaPrincipal) { v, insets ->
+                val barrasSistema = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(barrasSistema.left, barrasSistema.top, barrasSistema.right, barrasSistema.bottom)
+                insets
+            }
+        }
+
+        dbHelper = DatabaseHelper(this)
+        val prefs = getSharedPreferences("SaludAppPrefs", Context.MODE_PRIVATE)
+        currentUserId = prefs.getLong("user_id", -1L)
 
         initViews()
         actualizarValores()
@@ -142,47 +161,53 @@ class Presion : AppCompatActivity() {
         btnAnalizar.setOnClickListener {
             analizarMedicion()
         }
+
+        val btnVerHistorial = findViewById<Button>(R.id.btnVerHistorial)
+        btnVerHistorial.setOnClickListener {
+            val intent = android.content.Intent(this, Historial_presion::class.java)
+            startActivity(intent)
+        }
     }
 
     // DatePicker
     private fun mostrarDatePicker() {
-        val calendario = Calendar.getInstance()
-
-        val dialog = DatePickerDialog(
-            this,
-            { _, year, month, day ->
-                fechaSeleccionada = String.format("%02d/%02d/%04d", day, month + 1, year)
-                txtFecha.text = fechaSeleccionada
-            },
-            calendario.get(Calendar.YEAR),
-            calendario.get(Calendar.MONTH),
-            calendario.get(Calendar.DAY_OF_MONTH)
-        )
-
-        dialog.show()
+        val datePicker = com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Seleccionar Fecha")
+            .setSelection(com.google.android.material.datepicker.MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+            
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            val calendar = java.util.Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC"))
+            calendar.timeInMillis = selection
+            val year = calendar.get(java.util.Calendar.YEAR)
+            val month = calendar.get(java.util.Calendar.MONTH)
+            val day = calendar.get(java.util.Calendar.DAY_OF_MONTH)
+            
+            fechaSeleccionada = String.format("%02d/%02d/%04d", day, month + 1, year)
+            txtFecha.text = fechaSeleccionada
+        }
+        
+        datePicker.show(supportFragmentManager, "DATE_PICKER")
     }
 
     // TimePicker
     private fun mostrarTimePicker() {
-        val calendario = Calendar.getInstance()
+        val calendar = java.util.Calendar.getInstance()
+        val timePicker = com.google.android.material.timepicker.MaterialTimePicker.Builder()
+            .setTimeFormat(com.google.android.material.timepicker.TimeFormat.CLOCK_24H)
+            .setHour(calendar.get(java.util.Calendar.HOUR_OF_DAY))
+            .setMinute(calendar.get(java.util.Calendar.MINUTE))
+            .setTitleText("Seleccionar Hora")
+            .build()
 
-        // Usamos el tema predeterminado o uno que fuerce spinners si es necesario.
-        // Para que sea "horizontal" (spinner mode), a veces se requiere un tema específico.
-        val dialog = TimePickerDialog(
-            this,
-            android.R.style.Theme_Holo_Light_Dialog_NoActionBar, // Estilo clásico de spinners (horizontal)
-            { _, hour, minute ->
-                horaSeleccionada = String.format("%02d:%02d", hour, minute)
-                txtHora.text = horaSeleccionada
-            },
-            calendario.get(Calendar.HOUR_OF_DAY),
-            calendario.get(Calendar.MINUTE),
-            true // formato 24h
-        )
+        timePicker.addOnPositiveButtonClickListener {
+            val hour = timePicker.hour
+            val minute = timePicker.minute
+            horaSeleccionada = String.format("%02d:%02d", hour, minute)
+            txtHora.text = horaSeleccionada
+        }
 
-        // Hacer el fondo transparente para el estilo Holo si es necesario
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog.show()
+        timePicker.show(supportFragmentManager, "TIME_PICKER")
     }
 
     // Lógica principal
@@ -228,6 +253,11 @@ class Presion : AppCompatActivity() {
         """.trimIndent()
 
         actualizarBadge(clasificacion)
+
+        if (currentUserId != -1L) {
+            dbHelper.registrarPresion(currentUserId, sistolica, diastolica, pulso)
+            Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Clasificación
